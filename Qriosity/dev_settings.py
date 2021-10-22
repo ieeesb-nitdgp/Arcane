@@ -1,5 +1,5 @@
 import os
-import django_heroku
+#import django_heroku
 
 import json
 
@@ -165,4 +165,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = params["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = params["EMAIL_HOST_PASSWORD"]
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
