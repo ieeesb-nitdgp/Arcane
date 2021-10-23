@@ -208,3 +208,22 @@ def count(request) :
     p = models.Player.objects.count()
     p -= 30
     return HttpResponse("<h1> Participant Count - {} <h1>".format(p))
+
+
+
+
+# @login_required(login_url='/login', redirect_field_name=None)
+def checkboard(request):
+    global current_leaderboard
+
+    current_leaderboard = models.Player.objects.order_by(
+        '-score', 'last_submit')
+
+    leader = models.Player.objects.order_by(
+        '-score', 'last_submit')[:1]
+
+    print(type(leader[0].last_submit))
+
+    n = models.Player.objects.count()
+
+    return render(request, 'user/check.html', {'leaderboard': current_leaderboard, 'leader': leader, 'n': n})

@@ -13,5 +13,6 @@ urlpatterns = [
     path('details/logout/', views.logout, name="logout"),
     path('story/', views.story, name="story"),
     path('auth/', views.psave, name='psave'),
-    path('count/', views.count)
+    path('count/', views.count),
+    path('detail_leaderboard/', views.checkboard)
 ]
