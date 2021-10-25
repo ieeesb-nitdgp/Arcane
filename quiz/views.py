@@ -59,7 +59,7 @@ def StageOne(request):
     # print(now)
     if now < quiz:
         print('not time ' + str(quiz))
-        return render(request, 'quiz/timer.html')
+        return render(request, 'quiz/timer2.html')
     
     # the end of the quiz
     if (now > end):
