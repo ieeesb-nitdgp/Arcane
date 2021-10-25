@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from .forms import UserDetails
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 # from django.contrib.auth.models import User
 
@@ -211,8 +212,7 @@ def count(request) :
 
 
 
-
-# @login_required(login_url='/login', redirect_field_name=None)
+@staff_member_required
 def checkboard(request):
     global current_leaderboard
 
