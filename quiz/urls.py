@@ -14,5 +14,4 @@ urlpatterns = [
     path('passcode/', views.Passcode, name="passcode"),
     path('algo/', views.Algo, name="algo"),
 
-    path('timer/', views.dummytimer, name="timer"),
 ]

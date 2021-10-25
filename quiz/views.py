@@ -14,6 +14,21 @@ hintValue = False
 hintButton = True
 question1 = Stage_1.objects.all()
 
+# time variables
+
+now = datetime.utcnow()+timedelta(hours=5.5)
+
+
+# Set the Date Time Here
+
+#Start
+quiz = datetime(2021, 10, 23, 19, 0, 0)       
+# First Round Ends
+firstend = datetime(2021, 10, 24, 19, 0, 0)
+# Second Round Ends
+end = datetime(2021, 10, 25, 23, 59, 59)
+
+
 
 @login_required(login_url='/login/auth0', redirect_field_name=None)
 def Algo(request):
@@ -39,23 +54,9 @@ def StageOne(request):
         player = get_object_or_404(Player, user=request.user)
     except Player.DoesNotExist: 
         return redirect('user:psave')
+  
 
-
-    now = datetime.utcnow()+timedelta(hours=5.5)
-
-    
-    # Set the Date Time Here
-
-    #Start
-    quiz = datetime(2021, 10, 23, 19, 0, 0)       
-    # First Round Ends
-    firstend = datetime(2021, 10, 24, 19, 0, 0)
-    # Second Round Ends
-    end = datetime(2021, 10, 25, 23, 59, 59)
-
-    
-
-    print(now)
+    # print(now)
     if now < quiz:
         print('not time ' + str(quiz))
         return render(request, 'quiz/timer.html')
@@ -107,6 +108,11 @@ def StageOne(request):
 
 @login_required(login_url='/login/auth0', redirect_field_name=None)
 def Stage1Hint(request):
+    # the end of the quiz
+    if (now > end):
+        print('end ' + str(end))
+        return render(request, 'quiz/timer.html', {"end": end})
+
     player = get_object_or_404(Player, user=request.user)
     hint = player.stageonehint_set.get(level=int(player.question_level))
     my_form = UserAnswer
@@ -126,6 +132,12 @@ def Stage1Hint(request):
 
 @login_required(login_url='/login/auth0', redirect_field_name=None)
 def Stage1Answer(request):
+
+        # the end of the quiz
+    if (now > end):
+        print('end ' + str(end))
+        return render(request, 'quiz/timer.html', {"end": end})
+
 
     if request.method == "POST":
         player = get_object_or_404(Player, user=request.user)
@@ -197,6 +209,13 @@ def Stage1Answer(request):
 
 @login_required(login_url='/login/auth0', redirect_field_name=None)
 def Index(request):
+
+    # the end of the quiz
+    if (now > end):
+        print('end ' + str(end))
+        return render(request, 'quiz/timer.html', {"end": end})
+
+
     q = StageTwo.objects.order_by('level')
     player = get_object_or_404(Player, user=request.user)
     if(player.level2 < -1):
@@ -212,6 +231,14 @@ def Index(request):
 
 @login_required(login_url='/login/auth0', redirect_field_name=None)
 def Passcode(request):
+
+
+    # the end of the quiz
+    if (now > end):
+        print('end ' + str(end))
+        return render(request, 'quiz/timer.html', {"end": end})
+
+
     code = "ENIGMAHACK"
     if request.method == "POST":
         my_form = UserAnswer(request.POST)
@@ -250,6 +277,15 @@ def Passcode(request):
 # individual questions of stage 2
 @login_required(login_url='/login/auth0', redirect_field_name=None)
 def Individual(request, qid):
+    '''View for stage 2'''
+
+    # the end of the quiz
+    if (now > end):
+        print('end ' + str(end))
+        return render(request, 'quiz/timer.html', {"end": end})
+
+    
+
     player = get_object_or_404(Player, user=request.user)
     if(player.level2 < -1):
         return render(request, 'quiz/smart.html')
@@ -333,6 +369,3 @@ def Individual(request, qid):
                     return HttpResponse('<h2> Your Form data was Invalid </h2>')
 
 
-
-def dummytimer(request):
-    return render(request, 'quiz/timer.html')
