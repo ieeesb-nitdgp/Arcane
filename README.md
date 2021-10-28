@@ -1,7 +1,9 @@
 # Arcane 
 
+Treasure Hunt website with various admin protected routes for promotion and moderation of participants.
+
 ### Installation 
-- Run ` pip install -r requirements2.txt `
+- Run ` pip install -r requirements.txt `
 - Create a config.json file following <a href="dummy.json">dummy.json</a>
 - Put it inside the Qriosity Folder (one constaining ```settings.py ``` 
 - Run `python local.py migrate`
@@ -31,3 +33,7 @@ python local.py createsuperuser
 Now you can play the quiz with the player instance that you created  
 
 - To upgrade anyone to level 2 make the count2 variable in admin panel = 0
+
+
+## License 
+This is a starware ⭐, which means you can use this code as long as you star the repo.
