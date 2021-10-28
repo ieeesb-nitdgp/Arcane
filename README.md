@@ -1,6 +1,7 @@
 # Arcane 
 
-Treasure Hunt website with various admin protected routes for promotion and moderation of participants.
+- Treasure Hunt website with various super-admin protected routes for promotion and moderation of participants.
+- 2 rounds, Dynamic Leaderboard, User Dashboard
 
 ### Installation 
 - Run ` pip install -r requirements.txt `
