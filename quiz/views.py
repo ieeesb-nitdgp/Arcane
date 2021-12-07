@@ -21,12 +21,16 @@ now = datetime.utcnow()+timedelta(hours=5.5)
 
 # Set the Date Time Here
 
+''' Set the date time as class datetime.datetime
+    (year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)'''
+
+
 #Start
 quiz = datetime(2021, 10, 23, 19, 0, 0)       
 # First Round Ends
-firstend = datetime(2021, 10, 24, 19, 0, 0)
+firstend = datetime(2022, 10, 24, 19, 0, 0)
 # Second Round Ends
-end = datetime(2021, 10, 25, 23, 59, 59)
+end = datetime(2022, 10, 25, 23, 59, 59)
 
 
 
