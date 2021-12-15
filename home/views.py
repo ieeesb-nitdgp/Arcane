@@ -37,79 +37,96 @@ def rules(request):
     return render(request, 'home/rule.html')
 
 
+def error_404(request, exception):
+        data = {}
+        return render(request,'home/404.html', data)
+
+
 @staff_member_required
 def page(request):
     "Only After 1st Round is complete"
 
-    p = get_object_or_404(Leaders, pk=1)
-    n = p.playerNum
-    lst = [0, 1, 2]
-    form = UserAnswer
+    '''rewrite this functtion it work shit 
+    https://sayanmondal.tech/blog/jekyll/update/2021/12/16/DjangoBulkUpdate.html
+    '''
 
-    if request.method == 'GET':
-        # print(n)
-        j = 1
-        leaders = Player.objects.order_by(
-            '-score', 'last_submit')[:n]
+    return HttpResponse("Build in progress")
 
-        email_list = []
 
-        for i in leaders:
-            i.rank = j
-            j += 1
-            i.save()
 
-            email_list.append(i.email)
+    # p = get_object_or_404(Leaders, pk=1)
+    # n = p.playerNum
+    # lst = [0, 1, 2]
+    # form = UserAnswer
 
-        print(email_list)
-        return render(request, 'home/page.html', {"n": n, "leaders": leaders, "form": form, "lst": lst[0]})
+    # if request.method == 'GET':
+    #     # print(n)
+    #     j = 1
+    #     leaders = Player.objects.order_by(
+    #         '-score', 'last_submit')[:n]
 
-    if request.method == "POST":    # if the admin submits the passcode
-        my_form = UserAnswer(request.POST)
+    #     email_list = []
 
-        if my_form.is_valid():
-            ans = my_form.cleaned_data.get("answer")
-            organs = "AlohaMoraHarryPotter"
+    #     for i in leaders:
+    #         i.rank = j
+    #         j += 1
+    #         i.save()
 
-            
+    #         email_list.append(i.email)
 
-            # correct answer
-            if (str(organs) == str(ans)):   # if the answer is correct
-                leaders = Player.objects.order_by(
-                    '-score', 'last_submit')[:n]
-                for x in leaders:
-                    x.level2 = 0           
+    #     print(email_list)
+    #     return render(request, 'home/page.html', {"n": n, "leaders": leaders, "form": form, "lst": lst[0]})
+
+    # if request.method == "POST":    # if the admin submits the passcode
+    #     my_form = UserAnswer(request.POST)
+
+    #     if my_form.is_valid():
+    #         ans = my_form.cleaned_data.get("answer")
+    #         organs = "AlohaMoraHarryPotter"
+
+    #         # shit code below 
+
+    #         # correct answer
+    #         if (str(organs) == str(ans)):   # if the answer is correct
+    #             leaders = Player.objects.order_by(
+    #                 '-score', 'last_submit')[:n]
+                
+    #             u = 
+
+    #             Player.objects.filter( score > u ).update(name="foo")
+
+
+    #             for x in leaders:
+    #                 x.level2 = 0           
                     
-                    x.save()
-                    print(x.name)
+    #                 x.save()
+    #                 print(x.name)
 
-                    with open('text_messages/login_user.txt', 'r') as file:
-                        data_email = file.read()
+    #                 with open('text_messages/login_user.txt', 'r') as file:
+    #                     data_email = file.read()
 
-                    send_mail(
-                            'Congrats, you cleared round 1 !',
-                            str(data_email).format(x.name),
-                            'ieeesbnitd@gmail.com',
-                            [x.email],
-                            fail_silently=True,
-                            )
-
-
-
-                return render(request, 'home/page.html', {"n": n, "leaders": leaders, "form": form, "lst": lst[1]})
-
-            # incorrect answer
-            else:   # returns the same page
-                leaders = Player.objects.order_by(
-                    '-score', 'last_submit')[:n]
-                return render(request, 'home/page.html', {"n": n, "leaders": leaders, "form": form, "lst": lst[2]})
-        else:
-            return HttpResponse('<h2> Your Form Data was Invalid </h2>')
+    #                 send_mail(
+    #                         'Congrats, you cleared round 1 !',
+    #                         str(data_email).format(x.name),
+    #                         'ieeesbnitd@gmail.com',
+    #                         [x.email],
+    #                         fail_silently=True,
+    #                         )
 
 
-def error_404(request, exception):
-        data = {}
-        return render(request,'home/404.html', data)
+
+    #             return render(request, 'home/page.html', {"n": n, "leaders": leaders, "form": form, "lst": lst[1]})
+
+    #         # incorrect answer
+    #         else:   # returns the same page
+    #             leaders = Player.objects.order_by(
+    #                 '-score', 'last_submit')[:n]
+    #             return render(request, 'home/page.html', {"n": n, "leaders": leaders, "form": form, "lst": lst[2]})
+    #     else:
+    #         return HttpResponse('<h2> Your Form Data was Invalid </h2>')
+
+
+
 
 
 
