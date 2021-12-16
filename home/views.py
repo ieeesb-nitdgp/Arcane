@@ -55,7 +55,7 @@ def page(request):
     leaderboard = Player.objects.filter(score__gte = cutOffScore )
     form = UserAnswer
 
-    context =     {  
+    context = {  
     "leaders" : leaderboard  ,
     "form" : form ,
     "case" : 0,
