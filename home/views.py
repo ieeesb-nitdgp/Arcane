@@ -46,6 +46,23 @@ def error_404(request, exception):
         return render(request,'home/404.html', data)
 
 
+def send_mass_qualification_mails(leaderboard):
+    '''Mass email alternative '''
+
+    subject = "You have Qualified for Round 2" 
+    with open('text_messages/login_user.txt', 'r') as file:
+        message = file.read()
+    message = str(message)
+    from_email = "ieeesbnitd@gmail.com"
+    recipient_list = list(leaderboard.values_list('email', flat=True))
+
+    messages = [(subject, message, from_email, [recipient]) for recipient in recipient_list]
+
+    send_mass_mail(messages)
+
+
+
+
 def send_qualification_mails(leaderboard) :
     '''Helper method to send qualification emails
     This is currently using cc and doesnot use mass mailing features
@@ -59,13 +76,10 @@ def send_qualification_mails(leaderboard) :
     subject = "You have Qualified for Round 2" 
     message = str(message)
     from_email = "ieeesbnitd@gmail.com"
-    recipient_list = list(leaderboard.values_list('email', flat=True))
+    reciever_list = list(leaderboard.values_list('email', flat=True))
         
-
     connection = mail.get_connection()
-
     connection.open()
-    reciever_list= recipient_list  #extend this list according to your requirement
     email1 = mail.EmailMessage(subject, message, from_email,
                             reciever_list, connection=connection)
     email1.send()
@@ -112,12 +126,8 @@ def page(request):
             if (str(organs) == str(ans)):   
                 Player.objects.filter(score__gte = cutOffScore).update(level2 = 0 )
                 context["case"] = 1
-                
 
-                # sending emails 
-
-                send_qualification_mails(leaderboard)
-
+                send_mass_qualification_mails(leaderboard)
 
                 return render(request, "home/page.html",context= context )
 
