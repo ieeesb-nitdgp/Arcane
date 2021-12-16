@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
+
+from user.views import leaderboard
 from .models import Leaders
 from user.models import Player
 from quiz.forms import UserAnswer
@@ -44,13 +46,47 @@ def error_404(request, exception):
 
 @staff_member_required
 def page(request):
-    "Only After 1st Round is complete"
-
-    '''rewrite this functtion it work shit 
-    https://sayanmondal.tech/blog/jekyll/update/2021/12/16/DjangoBulkUpdate.html
+    '''Only After 1st Round is complete
+    SQL Querries = 2 ( generally )
+    Update Querry = 1
     '''
 
-    return HttpResponse("Build in progress")
+    cutOffScore = Leaders.objects.all()[0].cutoffScore
+    leaderboard = Player.objects.filter(score__gte = cutOffScore )
+    form = UserAnswer
+
+    context =     {  
+    "leaders" : leaderboard  ,
+    "form" : form ,
+    "case" : 0,
+    "cutOffScore" : cutOffScore
+    }
+
+    if request.method == "GET" :
+        return render(request, "home/page.html",context= context )
+
+    if request.method == "POST":
+
+        my_form = UserAnswer(request.POST)
+
+        if my_form.is_valid():
+            ans = my_form.cleaned_data.get("answer")
+            organs = "AlohaMoraHarryPotter"
+
+            # if the answer is correct
+            if (str(organs) == str(ans)):   
+                Player.objects.filter(score__gte = cutOffScore).update(level2 = 0 )
+                context["case"] = 1
+                return render(request, "home/page.html",context= context )
+
+            # incorrect answer
+            else:   
+                context["case"] = 2
+                return render(request, "home/page.html",context= context )
+                
+        else:
+            return HttpResponse('<h2> Your Form Data was Invalid </h2>')
+
 
 
 

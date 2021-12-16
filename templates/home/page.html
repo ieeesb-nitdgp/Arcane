@@ -3,7 +3,7 @@
 
 <div class="container">
 
-  <h2>The top {{n }} qualified participants are</h2>
+  <h2>The cutoff score is {{cutOffScore}} </h2>
   <br />
 
   <div >
@@ -46,14 +46,14 @@
 
 
   <div class="check">
-    {% if lst == 0 %}
+    {% if case == 0 %}
     <p>
       Please Be sure before entering, <br />
       There is no going back
     </p>
-    {% endif %} {% if lst == 1 %}
+    {% endif %} {% if case == 1 %}
     <p>Players promoted</p>
-    {% endif %} {% if lst == 2 %}
+    {% endif %} {% if case == 2 %}
     <p>wrong password</p>
     {% endif %}
   </div>
