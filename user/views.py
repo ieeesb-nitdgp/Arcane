@@ -8,10 +8,10 @@ from .forms import UserDetails
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+import os
 
-# from django.contrib.auth.models import User
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Create your views here.
 
 current_leaderboard = None
 
@@ -21,7 +21,15 @@ def logout(request):
     django_logout(request)
     domain = settings.SOCIAL_AUTH_AUTH0_DOMAIN
     client_id = settings.SOCIAL_AUTH_AUTH0_KEY
+
     return_to = 'https://ieee-arcane.herokuapp.com/' # this can be current domain
+
+
+    path_to_file = os.path.join(BASE_DIR, 'Qriosity/config.json')
+
+    if( os.path.exists(path_to_file)  ) :
+        return_to = 'http://127.0.0.1:8000/'
+
     return redirect(f'https://{domain}/v2/logout?client_id={client_id}&returnTo={return_to}')
 
 
