@@ -58,7 +58,7 @@ def send_mass_qualification_mails(leaderboard):
 
     messages = [(subject, message, from_email, [recipient]) for recipient in recipient_list]
 
-    send_mass_mail(messages)
+    return send_mass_mail(messages,fail_silently=True)
 
 
 
@@ -127,7 +127,8 @@ def page(request):
                 Player.objects.filter(score__gte = cutOffScore).update(level2 = 0 )
                 context["case"] = 1
 
-                send_mass_qualification_mails(leaderboard)
+                numberSend = send_mass_qualification_mails(leaderboard)
+                context["numberSend"] = numberSend
 
                 return render(request, "home/page.html",context= context )
 
