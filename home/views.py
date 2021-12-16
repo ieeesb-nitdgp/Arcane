@@ -11,6 +11,8 @@ from django.contrib import messages
 
 from django.contrib.admin.views.decorators import staff_member_required
 
+from django.core.mail import send_mass_mail
+from django.core import mail
 
 # Create your views here.
 @staff_member_required
@@ -44,6 +46,35 @@ def error_404(request, exception):
         return render(request,'home/404.html', data)
 
 
+def send_qualification_mails(leaderboard) :
+    '''Helper method to send qualification emails
+    This is currently using cc and doesnot use mass mailing features
+    Have to replace it.    
+    '''
+
+    with open('text_messages/login_user.txt', 'r') as file:
+        message = file.read()
+
+
+    subject = "You have Qualified for Round 2" 
+    message = str(message)
+    from_email = "ieeesbnitd@gmail.com"
+    recipient_list = list(leaderboard.values_list('email', flat=True))
+        
+
+    connection = mail.get_connection()
+
+    connection.open()
+    reciever_list= recipient_list  #extend this list according to your requirement
+    email1 = mail.EmailMessage(subject, message, from_email,
+                            reciever_list, connection=connection)
+    email1.send()
+    connection.close()
+
+
+
+
+
 @staff_member_required
 def page(request):
     '''Only After 1st Round is complete
@@ -62,6 +93,8 @@ def page(request):
     "cutOffScore" : cutOffScore
     }
 
+
+
     if request.method == "GET" :
         return render(request, "home/page.html",context= context )
 
@@ -70,6 +103,8 @@ def page(request):
         my_form = UserAnswer(request.POST)
 
         if my_form.is_valid():
+
+
             ans = my_form.cleaned_data.get("answer")
             organs = "AlohaMoraHarryPotter"
 
@@ -77,6 +112,13 @@ def page(request):
             if (str(organs) == str(ans)):   
                 Player.objects.filter(score__gte = cutOffScore).update(level2 = 0 )
                 context["case"] = 1
+                
+
+                # sending emails 
+
+                send_qualification_mails(leaderboard)
+
+
                 return render(request, "home/page.html",context= context )
 
             # incorrect answer
