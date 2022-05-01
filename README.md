@@ -38,3 +38,12 @@ Now you can play the quiz with the player instance that you created
 
 ## License 
 This is a starware ⭐, which means you can use this code as long as you star the repo.
+
+## Contributors 
+
+Thanks to the amazing people - <br/>
+<a href = "https://github.com/sa-y-an/Arcane/graphs/contributors">
+<img src = "https://contrib.rocks/image?repo=sa-y-an/Arcane"/>
+</a>
+
+
