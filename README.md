@@ -41,7 +41,8 @@ This is a starware ⭐, which means you can use this code as long as you star th
 
 ## Contributors 
 
-Thanks to the amazing people - <br/>
+**Thanks to the amazing people who contributed -** <br/> <br/>
+
 <a href = "https://github.com/sa-y-an/Arcane/graphs/contributors">
 <img src = "https://contrib.rocks/image?repo=sa-y-an/Arcane"/>
 </a>
