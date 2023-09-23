@@ -22,7 +22,7 @@ def logout(request):
     domain = settings.SOCIAL_AUTH_AUTH0_DOMAIN
     client_id = settings.SOCIAL_AUTH_AUTH0_KEY
 
-    return_to = 'https://ieee-arcane.herokuapp.com/' # this can be current domain
+    return_to = 'https://arcane-n5n8.onrender.com/' # this can be current domain
 
 
     path_to_file = os.path.join(BASE_DIR, 'Qriosity/config.json')
