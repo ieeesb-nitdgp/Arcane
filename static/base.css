@@ -6,7 +6,7 @@ html{
 
 body{
     /* background-color: #0B0C10; */
-    background-color: transparent;
+    background-color: transparent !important;
     font-family: 'Darker Grotesque', sans-serif;
     color: white;
 }
@@ -39,7 +39,7 @@ div#main{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(#66FCF1,#22d8a1); 
+    background: linear-gradient(#66FCF150,#22d8a150); 
     border-radius: 10px;
 }
 
