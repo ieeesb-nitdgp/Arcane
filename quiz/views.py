@@ -26,11 +26,11 @@ now = datetime.utcnow()+timedelta(hours=5.5)
 
 
 #Start
-quiz = datetime(2021, 10, 23, 19, 0, 0)       
+quiz = datetime(2023, 10, 6, 18, 0, 0)
 # First Round Ends
-firstend = datetime(2024, 10, 24, 19, 0, 0)
+firstend = datetime(2023, 10, 7, 12, 0, 0)
 # Second Round Ends
-end = datetime(2024, 10, 25, 23, 59, 59)
+end = datetime(2024, 10, 8, 23, 59, 59)
 
 
 
@@ -242,7 +242,7 @@ def Passcode(request):
         print('end ' + str(end))
         return render(request, 'quiz/timer.html', {"end": end})
 
-
+    # TODO: change this
     code = "ENIGMAHACK"
     if request.method == "POST":
         my_form = UserAnswer(request.POST)
@@ -253,7 +253,7 @@ def Passcode(request):
             if (str(ans).lower() == str(code).lower()):
                 player = get_object_or_404(Player, user=request.user)
                 player.level2 = -1
-                player.score += 40
+                player.score += 15
                 player.last_submit = timezone.now()
                 player.save()
                 question_level = player.question_level

@@ -1,5 +1,5 @@
 {% extends 'base.html'%} {% load static %} {% block title %}
-<title>End Game !</title>
+<title>Last Question</title>
 <link rel="stylesheet" href="{%static 'quiz/Stage1.css' %}" />
 {% endblock %} {% block content %}
 <style>
@@ -14,12 +14,12 @@
 <div class="content container d-flex flex-column">
 	<div class="stage1 blocks">
 		<div class="ques-head d-flex">
-			<p>Thanks for playing with us !</p>
+			<p>Last Question</p>
 			<div></div>
 		</div>
 
 		<div class="ques">
-			<h3 class="qtitle">End Game</h3>
+			<h3 class="qtitle">The Final Hurdle</h3>
 
 			<div class="ques-content d-flex">
 				<!-- description -->
@@ -63,7 +63,7 @@
 	</div>
 </div>
 
-<script>
+<!-- <script>
 	function crypto(code) {
 		if (code == "cicada") {
 			console.log(
@@ -91,6 +91,6 @@
 			"%c Hint - call the crypto method to your rescue ",
 			"font-weight: bold; margin: 25px 0; font-size: 20px; color: #3b80ff; text-shadow: 1px 1px 0 #f4715f , 1px 1px 0 #04b7ce , 1px 1px 0 #057b77"
 		);
-</script>
+</script> -->
 
 {% endblock %}

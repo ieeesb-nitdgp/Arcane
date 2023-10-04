@@ -100,7 +100,24 @@
 </div> -->
 
 <script>
-	if(localStorage.getItem("vid")==null){
+	// click/touch not detected on ipad
+	function isIpad() {
+		const ua = window.navigator.userAgent;
+		if (ua.indexOf('iPad') > -1) {
+			return true;
+		}
+
+		if (ua.indexOf('Macintosh') > -1) {
+			try {
+				document.createEvent("TouchEvent");
+				return true;
+			} catch (e) {}
+		}
+
+		return false;
+	}
+
+	if(localStorage.getItem("vid")==null && !isIpad()) {
 		document.querySelector("#main").style.display = "none";
 
 		const vid = document.createElement("video");
