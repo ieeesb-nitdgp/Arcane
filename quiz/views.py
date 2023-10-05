@@ -242,8 +242,7 @@ def Passcode(request):
         print('end ' + str(end))
         return render(request, 'quiz/timer.html', {"end": end})
 
-    # TODO: change this
-    code = "ENIGMAHACK"
+    code = "flag{H0W_M4Y_1_H3LP_U}"
     if request.method == "POST":
         my_form = UserAnswer(request.POST)
         if my_form.is_valid():
