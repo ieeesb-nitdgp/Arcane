@@ -160,6 +160,8 @@ def Stage1Answer(request):
 
             ans = my_form.cleaned_data.get("answer")
 
+            print(ans)
+
             if (str(ans).lower() == str(question.answer).lower()):  # stage one answer checking
                 value = False
                 player.score += 15
