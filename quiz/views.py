@@ -28,7 +28,7 @@ now = datetime.utcnow()+timedelta(hours=5.5)
 #Start
 quiz = datetime(2022, 10, 6, 18, 0, 0)
 # First Round Ends
-firstend = datetime(2023, 10, 7, 12, 0, 0)
+firstend = datetime(2023, 11, 7, 12, 0, 0)
 # Second Round Ends
 end = datetime(2024, 10, 8, 23, 59, 59)
 
