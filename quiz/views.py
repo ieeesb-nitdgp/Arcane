@@ -72,7 +72,7 @@ def StageOne(request):
 
     # this is for first round ends but couldnt make to round 2
     if firstend < now and player.level2 < 0:
-        return render(request, 'quiz/disqualified.html')
+        return render(request, 'quiz/wait.html')
 
     
 
