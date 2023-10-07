@@ -327,6 +327,8 @@ def Individual(request, qid):
                             organs = get_object_or_404(
                                 StageTwo, level=qid).answer
 
+                            print(ans, player.name, p.level2)
+
                             # correct answer
                             if (str(organs).lower() == str(ans).lower()):   # if the answer is correct
                                 player.score += 20
