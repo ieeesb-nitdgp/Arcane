@@ -42,6 +42,7 @@ button.btn:hover{
     font-size: 36px;
 }
 .description{
+    overflow-wrap: anywhere;
     width: 50%;
     font-size: 24px;
     color: #C5C6C8;
